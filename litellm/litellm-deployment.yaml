@@ -14,6 +14,33 @@ spec:
     spec:
       containers:
       - name: litellm-container
-        image: ghcr.io/berriai/litellm:main-latest
+        image: ghcr.io/berriai/litellm:main-latest   
+        volumeMounts:
+        - name: litellm-config-volume
+          mountPath: /etc/config
+        args: [ "--port", "$(PORT)" , "--config", "/etc/config/litellmProxyConfig",]
+        env:
+          - name: MASTER_KEY
+            valueFrom:
+              secretKeyRef:
+                name: litellm-secrets
+                key: MASTER_KEY
+          - name: AZURE_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: litellm-secrets
+                key: AZURE_API_KEY
+          - name: PORT
+            valueFrom:
+              configMapKeyRef:
+                name: litellm-config
+                key: CONTAINER_PORT        
         ports:
-        - containerPort: 8000
+        - containerPort: 4001
+      volumes:
+        - name: litellm-config-volume
+          configMap:
+            name: litellm-config
+            items:
+            - key: LITELLM-PROXY-CONFIG
+              path: litellmProxyConfig          

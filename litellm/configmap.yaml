@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: litellm-config
+data:
+  CONTAINER_PORT: "4001"
+  LITELLM-PROXY-CONFIG: |
+    model_list: 
+    - model_name: gpt-4-32k
+      litellm_params:
+        model: azure/gpt-4-32k
+        api_base: https://experimenteongpt4.openai.azure.com/
+        api_key: "os.environ/AZURE_API_KEY"
+    - model_name: gpt-35-turbo
+      litellm_params:
+        model: azure/gpt-35-turbo
+        api_base: https://experimenteongpt4.openai.azure.com/
+        api_key: "os.environ/AZURE_API_KEY"
+    general_settings: 
+      master_key: "os.environ/MASTER_KEY"

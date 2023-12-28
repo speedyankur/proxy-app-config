@@ -8,10 +8,10 @@ spec:
     server: 'https://kubernetes.default.svc'
     namespace: genai-platform
   source:
-    repoURL: 'https://git.eon-cds.de/repos/mlops-poc/genai/proxy-app-config.git'  # Replace with your Git repository URL
-    path: '/litellm'  # Path to the directory containing your manifests (if different)
+    repoURL: 'https://git.eon-cds.de/repos/ai-workstation/service/genai-platform/genai-proxy-sever.git'  # Replace with your Git repository URL
+    path: 'litellm'  # Path to the directory containing your manifests (if different)
     targetRevision: HEAD
-  project: default
+  project: genai-platform
   syncPolicy:
     automated:
       prune: true
