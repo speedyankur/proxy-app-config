@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: litellm-deployment
+spec:
+  selector:
+    matchLabels:
+      app: litellm
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: litellm
+    spec:
+      containers:
+      - name: litellm-container
+        image: ghcr.io/berriai/litellm:main-latest
+        ports:
+        - containerPort: 8000
