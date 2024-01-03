@@ -18,4 +18,4 @@ data:
         api_key: "os.environ/AZURE_API_KEY"
     general_settings: 
       master_key: "os.environ/MASTER_KEY"
-      database_url: "postgresql://genaiadmin:PhSRLRmb6%rc@litellm.postgres.database.azure.com:5432"
+      database_url: "postgresql://genaiadmin:PhSRLRmb6%rc@litellm.postgres.database.azure.com:5432/postgres"
