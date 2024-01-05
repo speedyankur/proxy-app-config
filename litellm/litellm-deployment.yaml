@@ -11,15 +11,6 @@ spec:
     metadata:
       labels:
         app: litellm
-      annotations:
-        secrets-store.csi.k8s.io/secret-objects: |
-          array:
-            - |
-              secretName: azure-secrets
-              type: Opaque
-              data: 
-              - objectName: psql-secret
-                key: PSQL_CONN_STR        
     spec:
       containers:
       - name: litellm-container
@@ -29,11 +20,6 @@ spec:
           mountPath: /etc/config
         args: [ "--port", "$(PORT)" , "--config", "/etc/config/litellmProxyConfig",]
         env:
-          - name: PSQL_CONN_STR
-            valueFrom:
-              secretKeyRef:
-                name: azure-secrets
-                key: PSQL_CONN_STR          
           - name: MASTER_KEY
             valueFrom:
               secretKeyRef:
@@ -52,12 +38,6 @@ spec:
         ports:
         - containerPort: 4001
       volumes:
-        - name: secrets-store-inline
-          csi:
-            driver: secrets-store.csi.k8s.io
-            readOnly: true
-            volumeAttributes:
-              secretProviderClass: "azure-keyvault"        
         - name: litellm-config-volume
           configMap:
             name: litellm-config
