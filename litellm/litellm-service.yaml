@@ -9,4 +9,4 @@ spec:
     - protocol: TCP
       port: 4001  # Adjust the port if your application uses a different one
       targetPort: 4001  # Adjust the target port if your application uses a different one
-  type: NodePort  # Change to NodePort or ClusterIP based on your needs
+  type: ClusterIP  # Change to NodePort or ClusterIP based on your needs

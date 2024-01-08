@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: production  # Or "staging" - you should start with staging while testing
+  name: litellm-ingress
+  namespace:  genai-platform
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: genai.mlops.eon.de
+    http:
+      paths:
+      - backend:
+          service:
+            name: litellm-service
+            port:
+              number: 4001
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - genai.mlops.eon.de
+    secretName: genai-platform.genai-mlops-eon-de
