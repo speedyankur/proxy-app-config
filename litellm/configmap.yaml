@@ -19,3 +19,4 @@ data:
     general_settings: 
       master_key: "os.environ/MASTER_KEY"
       database_url: "postgresql://psqladmin:lYgnG9@cGO@EOxyqIvuU@genai-psql-server.postgres.database.azure.com:5432/postgres"
+      allow_user_auth: true
